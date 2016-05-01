@@ -10,6 +10,7 @@
     :target: https://coveralls.io/github/bibi21000/janitoo_factory_exts?branch=master
     :alt: Coveralls results
 
+
 =====================================
 Welcome to Janitoo factory extensions
 =====================================
