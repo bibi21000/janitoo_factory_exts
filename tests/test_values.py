@@ -134,3 +134,55 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
     """
     entry_name='updown'
 
+    led = 0
+
+    def updown_up_cb(self, node_uuid=None, index=None):
+        self.led += 1
+
+    def updown_down_cb(self, node_uuid=None, index=None):
+        self.led -= 1
+
+    def updown_value_cb(self, node_uuid=None, index=None, data=None):
+        self.led = int(data)
+
+    def test_011_value_entry_poll(self, **kwargs):
+        JNTTFactoryPollCommon.test_011_value_entry_poll( self,
+            updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
+            updown_value_cb=updown_value_cb )
+
+    def test_101_value_entry_poll(self):
+        self.led = None
+        node_uuid='test_node'
+        main_value = self.get_main_value(
+            node_uuid=node_uuid,
+            updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
+            updown_value_cb=updown_value_cb )
+        self.assertFalse(main_value.is_writeonly)
+        print main_value
+        poll_value = main_value.create_poll_value()
+        print poll_value
+        main_value._set_poll(node_uuid, 0, 0)
+        self.assertEqual(0, main_value._get_poll(node_uuid, 0))
+        main_value._set_poll(node_uuid, 0, 5)
+        self.assertEqual(5, main_value._get_poll(node_uuid, 0))
+        self.assertEqual(5, main_value.poll_delay)
+        self.assertEqual(True, main_value.is_polled)
+        main_value._set_poll(node_uuid, 0, 0)
+        self.assertEqual(0, main_value._get_poll(node_uuid, 0))
+        self.assertEqual(0, main_value.poll_delay)
+        self.assertEqual(False, main_value.is_polled)
+
+    def test_110_blink(self):
+        self.led = None
+        node_uuid='test_node'
+        main_value = self.get_main_value(
+            node_uuid=node_uuid,
+            node_uuid=node_uuid,
+            updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
+            updown_value_cb=updown_value_cb )
+        try:
+            pass
+        finally:
+            main_value.stop()
+            #~ pass
+
