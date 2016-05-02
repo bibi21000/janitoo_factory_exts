@@ -129,3 +129,8 @@ class TestIpPing(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         self.assertEqual('192.168.24.5', main_value.get_config(node_uuid, 0))
         self.assertFalse(main_value.ping_ip(node_uuid, 0))
 
+class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
+    """Test the value factory
+    """
+    entry_name='updown'
+

@@ -97,6 +97,7 @@ setup(
         "janitoo.values": [
             "blink = janitoo_factory_exts.values.blink:make_blink",
             "ip_ping = janitoo_factory_exts.values.ping:make_ip_ping",
+            "updown = janitoo_factory_exts.values.updown:make_updown",
         ],
         "janitoo.threads": [
         ],
