@@ -57,16 +57,24 @@ class TestBlinkValue(JNTTFactory, JNTTFactoryPollCommon):
     def blink_on_cb(self, node_uuid=None, index=None):
         self.led = True
 
-    def test_011_value_entry_poll(self, **kwargs):
-        JNTTFactoryPollCommon.test_011_value_entry_poll(self, blink_off_cb=self.blink_off_cb, blink_on_cb=self.blink_on_cb)
+    def get_main_value(self, node_uuid='test_node', **kwargs):
+        return JNTTFactory.get_main_value(
+                    self,
+                    node_uuid = node_uuid,
+                    blink_off_cb=self.blink_off_cb,
+                    blink_on_cb=self.blink_on_cb,
+                    **kwargs)
+
+    #~ def test_011_value_entry_poll(self, **kwargs):
+        #~ JNTTFactoryPollCommon.test_011_value_entry_poll(self, blink_off_cb=self.blink_off_cb, blink_on_cb=self.blink_on_cb)
 
     def test_101_value_entry_poll(self):
         self.led = None
         node_uuid='test_node'
         main_value = self.get_main_value(
             node_uuid=node_uuid,
-            blink_off_cb=self.blink_off_cb,
-            blink_on_cb=self.blink_on_cb
+            #~ blink_off_cb=self.blink_off_cb,
+            #~ blink_on_cb=self.blink_on_cb
         )
         self.assertFalse(main_value.is_writeonly)
         print main_value
@@ -88,8 +96,8 @@ class TestBlinkValue(JNTTFactory, JNTTFactoryPollCommon):
         node_uuid='test_node'
         main_value = self.get_main_value(
             node_uuid=node_uuid,
-            blink_off_cb=self.blink_off_cb,
-            blink_on_cb=self.blink_on_cb,
+            #~ blink_off_cb=self.blink_off_cb,
+            #~ blink_on_cb=self.blink_on_cb,
             blink_on_delay=2,
             blink_off_delay=2,
         )
@@ -134,29 +142,30 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
     """
     entry_name='updown'
 
-    led = 0
+    level = 0
+
+    def get_main_value(self, node_uuid='test_node', **kwargs):
+        return JNTTFactory.get_main_value(
+                    self,
+                    node_uuid = node_uuid,
+                    updown_up_cb = self.updown_up_cb,
+                    updown_down_cb = self.updown_down_cb,
+                    updown_value_cb = self.updown_value_cb,
+                    **kwargs)
 
     def updown_up_cb(self, node_uuid=None, index=None):
-        self.led += 1
+        self.level += 1
 
     def updown_down_cb(self, node_uuid=None, index=None):
-        self.led -= 1
+        self.level -= 1
 
     def updown_value_cb(self, node_uuid=None, index=None, data=None):
-        self.led = int(data)
-
-    def test_011_value_entry_poll(self, **kwargs):
-        JNTTFactoryPollCommon.test_011_value_entry_poll( self,
-            updown_up_cb=self.updown_up_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=self.updown_value_cb )
+        self.level = int(data)
 
     def test_101_value_entry_poll(self):
         self.led = None
         node_uuid='test_node'
-        main_value = self.get_main_value(
-            node_uuid=node_uuid,
-            updown_up_cb=self.updown_up_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=self.updown_value_cb )
+        main_value = self.get_main_value(node_uuid=node_uuid)
         self.assertFalse(main_value.is_writeonly)
         print main_value
         poll_value = main_value.create_poll_value()
@@ -175,10 +184,7 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
     def test_110_blink(self):
         self.led = None
         node_uuid='test_node'
-        main_value = self.get_main_value(
-            node_uuid=node_uuid,
-            updown_up_cb=self.updown_up_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=self.updown_value_cb )
+        main_value = self.get_main_value(node_uuid=node_uuid)
         try:
             pass
         finally:
