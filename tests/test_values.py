@@ -148,7 +148,7 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
     def test_011_value_entry_poll(self, **kwargs):
         JNTTFactoryPollCommon.test_011_value_entry_poll( self,
             updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=updown_value_cb )
+            updown_value_cb=self.updown_value_cb )
 
     def test_101_value_entry_poll(self):
         self.led = None
@@ -156,7 +156,7 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         main_value = self.get_main_value(
             node_uuid=node_uuid,
             updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=updown_value_cb )
+            updown_value_cb=self.updown_value_cb )
         self.assertFalse(main_value.is_writeonly)
         print main_value
         poll_value = main_value.create_poll_value()
@@ -178,7 +178,7 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         main_value = self.get_main_value(
             node_uuid=node_uuid,
             updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
-            updown_value_cb=updown_value_cb )
+            updown_value_cb=self.updown_value_cb )
         try:
             pass
         finally:
