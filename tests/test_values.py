@@ -177,7 +177,6 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         node_uuid='test_node'
         main_value = self.get_main_value(
             node_uuid=node_uuid,
-            node_uuid=node_uuid,
             updown_up_cb=updown_up_cb.blink_off_cb, updown_down_cb=self.updown_down_cb,
             updown_value_cb=updown_value_cb )
         try:
@@ -185,4 +184,3 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         finally:
             main_value.stop()
             #~ pass
-
