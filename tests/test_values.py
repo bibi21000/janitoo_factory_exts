@@ -181,12 +181,27 @@ class TestUpDown(JNTTFactory, JNTTFactoryConfigCommon, JNTTFactoryPollCommon):
         self.assertEqual(0, main_value.poll_delay)
         self.assertEqual(False, main_value.is_polled)
 
-    def test_110_blink(self):
-        self.led = None
+    def test_110_up_down(self):
+        self.level = 0
         node_uuid='test_node'
         main_value = self.get_main_value(node_uuid=node_uuid)
         try:
-            pass
+            main_value.set_updown(node_uuid=node_uuid, data='up')
+            self.assertEqual(main_value.data, 1)
+            main_value.set_updown(node_uuid=node_uuid, data='up')
+            self.assertEqual(main_value.data, 2)
+            main_value.set_updown(node_uuid=node_uuid, data='down')
+            self.assertEqual(main_value.data, 1)
+            main_value.set_updown(node_uuid=node_uuid, data=14)
+            self.assertEqual(main_value.data, 14)
+            main_value.set_updown(node_uuid=node_uuid, data='14')
+            self.assertEqual(main_value.data, 14)
+            main_value.set_updown(node_uuid=node_uuid, data='0')
+            self.assertEqual(main_value.data, 0)
+            main_value.set_updown(node_uuid=node_uuid, data='up')
+            self.assertEqual(main_value.data, 1)
+            main_value.set_updown(node_uuid=node_uuid, data='down')
+            self.assertEqual(main_value.data, 0)
         finally:
             main_value.stop()
             #~ pass

@@ -69,7 +69,7 @@ class JNTValueUpDown(JNTValueFactoryEntry):
         if self.updown_up_cb is None or self.updown_down_cb is None:
             raise RuntimeError("You must define updown_up_cb and updown_down_cb parameters")
         help = kwargs.pop('help', 'Up/Down')
-        default = kwargs.pop('default', None)
+        default = kwargs.pop('default', 0)
         label = kwargs.pop('label', 'Up/Down')
         index = kwargs.pop('index', 0)
         list_items = kwargs.pop('list_items', ['up', 'down', '#val'])
@@ -90,13 +90,16 @@ class JNTValueUpDown(JNTValueFactoryEntry):
     def set_updown(self, node_uuid=None, index=None, data = None):
         """
         """
+        if self._data is None:
+            self._data = self.default
         if data == 'up':
-            self._data = data
-            self.updown_up_cb(node_uuid=node_uuid, index=index, data = data)
+            self._data += 1
+            self.updown_up_cb(node_uuid=node_uuid, index=index)
         elif data == 'down':
-            self._data = data
-            self.updown_down_cb(node_uuid=node_uuid, index=index, data = data)
+            self._data -= 1
+            self.updown_down_cb(node_uuid=node_uuid, index=index)
         elif self.updown_value_cb is not None:
-            self.self.updown_value_cb(node_uuid=node_uuid, index=index, data = data)
+            self.updown_value_cb(node_uuid=node_uuid, index=index, data = data)
+            self._data = int(data)
         else:
             logger.warning('[%s] - set_blink invalid data %s', self.__class__.__name__, data)
