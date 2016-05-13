@@ -1,0 +1,10 @@
+janitoo_factory_exts.threads package
+====================================
+
+Module contents
+---------------
+
+.. automodule:: janitoo_factory_exts.threads
+    :members:
+    :undoc-members:
+    :show-inheritance:

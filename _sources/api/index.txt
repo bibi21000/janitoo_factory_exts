@@ -1,0 +1,19 @@
+janitoo_factory_exts package
+============================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    janitoo_factory_exts.components
+    janitoo_factory_exts.threads
+    janitoo_factory_exts.values
+
+Module contents
+---------------
+
+.. automodule:: janitoo_factory_exts
+    :members:
+    :undoc-members:
+    :show-inheritance:
