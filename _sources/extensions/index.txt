@@ -1,15 +1,7 @@
-janitoo_factory_exts package
-============================
+Janitoo's extensions
+====================
 
-Show janitoo's extensions.
+This package contains the following extensions for Janitoo.
 
-Core extensions
----------------
-
-Values
-^^^^^^
-
- - ip_ping (janitoo_factory_exts.values.ping:make_ip_ping)
- - updown (janitoo_factory_exts.values.updown:make_updown)
- - blink (janitoo_factory_exts.values.blink:make_blink)
+.. jnt-extensions::
 
