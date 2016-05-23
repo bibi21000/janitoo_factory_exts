@@ -155,7 +155,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
                 self.blink_on_cb(node_uuid=self.node_uuid)
                 try:
                     delay = self.delays[self._data]['off']
-                except:
+                except Exception:
                     delay = 0
                     logger.exception('[%s] - Exception when timer_change', self.__class__.__name__)
                 if delay > 0:
@@ -165,7 +165,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
                 self.blink_off_cb(node_uuid=self.node_uuid)
                 try:
                     delay = self.delays[self._data]['on']
-                except:
+                except Exception:
                     delay = 0
                     logger.exception('[%s] - Exception when timer_change', self.__class__.__name__)
                 if delay > 0:
