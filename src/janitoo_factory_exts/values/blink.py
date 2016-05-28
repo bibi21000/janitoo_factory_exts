@@ -109,6 +109,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
             default=default,
             genre=0x01, type=0x05,
             is_writeonly=False, is_readonly=False, **kwargs)
+        self._data = self.default
 
     def start(self):
         """Start the value
