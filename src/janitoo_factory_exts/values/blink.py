@@ -131,7 +131,8 @@ class JNTValueBlink(JNTValueFactoryEntry):
     def start_blinking(self, **kwargs):
         """
         """
-        self.timer_lock = threading.Lock()
+        if self.timer_lock is None:
+            self.timer_lock = threading.Lock()
         self.timer_lock.acquire()
         try:
             if self.timer is not None:
