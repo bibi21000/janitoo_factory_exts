@@ -206,7 +206,7 @@
             <span class="p">},</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timer_lock</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer_lock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blink_on_cb</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">blink_off_cb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;You must define blink_off_cb and blink_on_cb parameters&quot;</span><span class="p">)</span>
         <span class="n">help</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;help&#39;</span><span class="p">,</span> <span class="s">&#39;Blink&#39;</span><span class="p">)</span>
@@ -221,6 +221,7 @@
             <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
             <span class="n">genre</span><span class="o">=</span><span class="mh">0x01</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mh">0x05</span><span class="p">,</span>
             <span class="n">is_writeonly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">is_readonly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span>
 
 <div class="viewcode-block" id="JNTValueBlink.start"><a class="viewcode-back" href="../../../api/janitoo_factory_exts.values.html#janitoo_factory_exts.values.blink.JNTValueBlink.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Start the value</span>
@@ -242,7 +243,6 @@
 <div class="viewcode-block" id="JNTValueBlink.start_blinking"><a class="viewcode-back" href="../../../api/janitoo_factory_exts.values.html#janitoo_factory_exts.values.blink.JNTValueBlink.start_blinking">[docs]</a>    <span class="k">def</span> <span class="nf">start_blinking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timer_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timer_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
