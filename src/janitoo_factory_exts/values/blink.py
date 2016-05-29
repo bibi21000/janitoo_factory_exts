@@ -94,7 +94,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
             },
         }
         self.timer = None
-        self.timer_lock = None
+        self.timer_lock = self.timer_lock = threading.Lock()
         if self.blink_on_cb is None or self.blink_off_cb is None:
             raise RuntimeError("You must define blink_off_cb and blink_on_cb parameters")
         help = kwargs.pop('help', 'Blink')
@@ -131,8 +131,6 @@ class JNTValueBlink(JNTValueFactoryEntry):
     def start_blinking(self, **kwargs):
         """
         """
-        if self.timer_lock is None:
-            self.timer_lock = threading.Lock()
         self.timer_lock.acquire()
         try:
             if self.timer is not None:
