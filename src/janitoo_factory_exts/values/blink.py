@@ -111,14 +111,14 @@ class JNTValueBlink(JNTValueFactoryEntry):
             is_writeonly=False, is_readonly=False, **kwargs)
         self._data = self.default
 
-    def start(self):
+    def start(self, **kwargs):
         """Start the value
         """
         if self.timer_lock is None:
             self.timer_lock = threading.Lock()
         self.start_blinking()
 
-    def stop(self):
+    def stop(self, **kwargs):
         """Start the value
         """
         if self.timer_lock is not None:

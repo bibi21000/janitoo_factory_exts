@@ -102,6 +102,7 @@ class TestBlinkValue(JNTTFactory, JNTTFactoryPollCommon):
             blink_off_delay=2,
         )
         try:
+            main_value.start()
             main_value.set_blink(node_uuid=node_uuid, data='blink')
             self.assertNotEqual(main_value.timer, None)
             self.assertEqual(main_value.data, 'blink')
