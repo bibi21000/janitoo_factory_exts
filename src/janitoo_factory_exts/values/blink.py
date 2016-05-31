@@ -94,7 +94,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
             },
         }
         self.timer = None
-        self.timer_lock = threading.Lock()
+        self.timer_lock = None
         if self.blink_on_cb is None or self.blink_off_cb is None:
             raise RuntimeError("You must define blink_off_cb and blink_on_cb parameters")
         help = kwargs.pop('help', 'Blink')
@@ -114,6 +114,8 @@ class JNTValueBlink(JNTValueFactoryEntry):
     def start(self):
         """Start the value
         """
+        if self.timer_lock is None:
+            self.timer_lock = threading.Lock()
         self.start_blinking()
 
     def stop(self):
@@ -121,6 +123,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
         """
         if self.timer_lock is not None:
             self.stop_blinking()
+        self.timer_lock = None
 
     def create_poll_value(self, **kwargs):
         """
@@ -187,7 +190,6 @@ class JNTValueBlink(JNTValueFactoryEntry):
             self.blink_off_cb(node_uuid=self.node_uuid)
         finally:
             self.timer_lock.release()
-        self.timer_lock = None
 
     def get_blink(self, node_uuid=None, index=None):
         """
