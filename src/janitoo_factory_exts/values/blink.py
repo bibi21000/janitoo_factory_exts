@@ -181,6 +181,8 @@ class JNTValueBlink(JNTValueFactoryEntry):
         """
         """
         #~ print 'locking', self.timer_lock.acquire(False)
+        if self.timer_lock is None:
+            return
         self.timer_lock.acquire()
         try:
             if self.timer is not None:
