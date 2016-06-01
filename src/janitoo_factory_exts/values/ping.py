@@ -41,17 +41,9 @@ from janitoo_factory.values.config import JNTValueConfigString
 #Must be implemented for non-regression
 from janitoo.classes import COMMAND_DESC
 
-COMMAND_CONFIGURATION = 0x0070
 COMMAND_SENSOR_BINARY = 0x0030
-COMMAND_SENSOR_MULTILEVEL = 0x0031
-COMMAND_BASIC = 0x0020
-COMMAND_BLINK = 0x3203
 
-assert(COMMAND_DESC[COMMAND_BLINK] == 'COMMAND_BLINK')
-assert(COMMAND_DESC[COMMAND_BASIC] == 'COMMAND_BASIC')
-assert(COMMAND_DESC[COMMAND_CONFIGURATION] == 'COMMAND_CONFIGURATION')
 assert(COMMAND_DESC[COMMAND_SENSOR_BINARY] == 'COMMAND_SENSOR_BINARY')
-assert(COMMAND_DESC[COMMAND_SENSOR_MULTILEVEL] == 'COMMAND_SENSOR_MULTILEVEL')
 ##############################################################
 
 def make_ip_ping(**kwargs):
@@ -98,6 +90,6 @@ class JNTValueIpPing(JNTValueFactoryEntry):
                 return False
             self.instances[index]['data'] = True
             return True
-        except :
+        except Exception:
             logger.exception('[%s] - Exception when pinging (%s)', self.__class__.__name__, self.instances[index]['config'])
             return False

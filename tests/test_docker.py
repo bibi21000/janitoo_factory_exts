@@ -41,3 +41,13 @@ from janitoo.runner import Runner, jnt_parse_args
 from janitoo.server import JNTServer
 from janitoo.utils import HADD_SEP, HADD
 
+import test_values
+
+class TestIpPing(test_values.TestIpPing):
+    pass
+
+class TestBlinkValue(test_values.TestBlinkValue):
+    pass
+
+class TestUpDown(test_values.TestUpDown):
+    pass
