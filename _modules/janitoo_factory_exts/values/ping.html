@@ -153,17 +153,9 @@
 <span class="c">#Must be implemented for non-regression</span>
 <span class="kn">from</span> <span class="nn">janitoo.classes</span> <span class="kn">import</span> <span class="n">COMMAND_DESC</span>
 
-<span class="n">COMMAND_CONFIGURATION</span> <span class="o">=</span> <span class="mh">0x0070</span>
 <span class="n">COMMAND_SENSOR_BINARY</span> <span class="o">=</span> <span class="mh">0x0030</span>
-<span class="n">COMMAND_SENSOR_MULTILEVEL</span> <span class="o">=</span> <span class="mh">0x0031</span>
-<span class="n">COMMAND_BASIC</span> <span class="o">=</span> <span class="mh">0x0020</span>
-<span class="n">COMMAND_BLINK</span> <span class="o">=</span> <span class="mh">0x3203</span>
 
-<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_BLINK</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_BLINK&#39;</span><span class="p">)</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_BASIC</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_BASIC&#39;</span><span class="p">)</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_CONFIGURATION</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_CONFIGURATION&#39;</span><span class="p">)</span>
 <span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_SENSOR_BINARY</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_SENSOR_BINARY&#39;</span><span class="p">)</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_SENSOR_MULTILEVEL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_SENSOR_MULTILEVEL&#39;</span><span class="p">)</span>
 <span class="c">##############################################################</span>
 
 <div class="viewcode-block" id="make_ip_ping"><a class="viewcode-back" href="../../../api/janitoo_factory_exts.values.html#janitoo_factory_exts.values.ping.make_ip_ping">[docs]</a><span class="k">def</span> <span class="nf">make_ip_ping</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -210,7 +202,7 @@
                 <span class="k">return</span> <span class="bp">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">except</span> <span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception when pinging (</span><span class="si">%s</span><span class="s">)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s">&#39;config&#39;</span><span class="p">])</span>
             <span class="k">return</span> <span class="bp">False</span></div></div>
 </pre></div>
