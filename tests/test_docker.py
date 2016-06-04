@@ -44,10 +44,16 @@ from janitoo.utils import HADD_SEP, HADD
 import test_values
 
 class TestIpPing(test_values.TestIpPing):
-    pass
+    def setUp(self):
+        test_values.TestIpPing.onlyDockerTest()
+        test_values.TestIpPing.setUp(self)
 
 class TestBlinkValue(test_values.TestBlinkValue):
-    pass
+    def setUp(self):
+        test_values.TestBlinkValue.onlyDockerTest()
+        test_values.TestBlinkValue.setUp(self)
 
 class TestUpDown(test_values.TestUpDown):
-    pass
+    def setUp(self):
+        test_values.TestUpDown.onlyDockerTest()
+        test_values.TestUpDown.setUp(self)
