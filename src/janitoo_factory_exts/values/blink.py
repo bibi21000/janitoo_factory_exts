@@ -106,7 +106,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
         JNTValueFactoryEntry.__init__(self, entry_name=entry_name, help=help, label=label,
             get_data_cb=self.get_blink, set_data_cb=self.set_blink,
             index=index, cmd_class=cmd_class,
-            default=default,
+            default=default, list_items=list_items,
             genre=0x01, type=0x05,
             is_writeonly=False, is_readonly=False, **kwargs)
         self._data = self.default
