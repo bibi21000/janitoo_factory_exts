@@ -66,7 +66,8 @@ class JNTValueIpPing(JNTValueFactoryEntry):
         """
         """
         help = kwargs.pop('help', 'The IP to ping')
-        return self._create_config_value(type=0x21, help=help)
+        type = kwargs.pop('type', 0x21)
+        return self._create_config_value(type=type, help=help)
 
     def create_poll_value(self, **kwargs):
         """
