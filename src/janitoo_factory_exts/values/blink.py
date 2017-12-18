@@ -155,7 +155,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
                 self.timer.cancel()
                 self.timer = None
             if status:
-                self.blink_on_cb(node_uuid=self.node_uuid)
+                self.blink_on_cb(node_uuid=self.node_uuid, index=self.index)
                 try:
                     delay = self.delays[self._data]['off']
                 except Exception:
@@ -165,7 +165,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
                     self.timer = threading.Timer(delay, self.timer_change, args=(False,))
                     self.timer.start()
             else:
-                self.blink_off_cb(node_uuid=self.node_uuid)
+                self.blink_off_cb(node_uuid=self.node_uuid, index=self.index)
                 try:
                     delay = self.delays[self._data]['on']
                 except Exception:
