@@ -41,19 +41,6 @@ from janitoo.runner import Runner, jnt_parse_args
 from janitoo.server import JNTServer
 from janitoo.utils import HADD_SEP, HADD
 
+JNTTBase.onlyDockerTest()
+
 from .test_values import TestIpPing, TestBlinkValue, TestUpDown
-
-class TestIpPing(TestIpPing):
-    def setUp(self):
-        TestIpPing.onlyDockerTest()
-        TestIpPing.setUp(self)
-
-class TestBlinkValue(TestBlinkValue):
-    def setUp(self):
-        TestBlinkValue.onlyDockerTest()
-        TestBlinkValue.setUp(self)
-
-class TestUpDown(TestUpDown):
-    def setUp(self):
-        TestUpDown.onlyDockerTest()
-        TestUpDown.setUp(self)
