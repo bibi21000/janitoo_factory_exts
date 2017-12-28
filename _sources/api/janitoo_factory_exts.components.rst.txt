@@ -1,0 +1,10 @@
+janitoo_factory_exts.components package
+=======================================
+
+Module contents
+---------------
+
+.. automodule:: janitoo_factory_exts.components
+    :members:
+    :undoc-members:
+    :show-inheritance:
