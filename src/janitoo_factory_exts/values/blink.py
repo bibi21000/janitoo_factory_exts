@@ -76,7 +76,19 @@ class JNTValueBlink(JNTValueFactoryEntry):
                 'on' : kwargs.pop('heartbeat_on_delay', 0.5),
                 'off' : kwargs.pop('heartbeat_off_delay', 300),
             },
+            'on' : {
+                'on' : kwargs.pop('heartbeat_on_delay', 0.5),
+                'off' : kwargs.pop('heartbeat_off_delay', 300),
+            },
             'info' : {
+                'on' : kwargs.pop('notify_on_delay', 0.6),
+                'off' : kwargs.pop('notify_off_delay', 60),
+            },
+            'info1' : {
+                'on' : kwargs.pop('notify_on_delay', 0.6),
+                'off' : kwargs.pop('notify_off_delay', 60),
+            },
+            'info2' : {
                 'on' : kwargs.pop('notify_on_delay', 0.6),
                 'off' : kwargs.pop('notify_off_delay', 60),
             },
@@ -151,13 +163,17 @@ class JNTValueBlink(JNTValueFactoryEntry):
             return
         self.timer_lock.acquire()
         try:
+            if self.data == 0:
+                self.data = 'off'
+            if self.data == 1:
+                self.data = 'on'
             if self.timer is not None:
                 self.timer.cancel()
                 self.timer = None
             if status:
                 self.blink_on_cb(node_uuid=self.node_uuid, index=self.index)
                 try:
-                    delay = self.delays[self._data]['off']
+                    delay = self.delays[self.data]['off']
                 except Exception:
                     delay = 0
                     logger.exception('[%s] - Exception when timer_change', self.__class__.__name__)
@@ -167,7 +183,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
             else:
                 self.blink_off_cb(node_uuid=self.node_uuid, index=self.index)
                 try:
-                    delay = self.delays[self._data]['on']
+                    delay = self.delays[self.data]['on']
                 except Exception:
                     delay = 0
                     logger.exception('[%s] - Exception when timer_change', self.__class__.__name__)
@@ -204,7 +220,7 @@ class JNTValueBlink(JNTValueFactoryEntry):
         if data == 'off':
             self._data = data
             self.stop_blinking(node_uuid=node_uuid, index=index, data = data)
-        elif data in ['blink', 'heartbeat', 'notify', 'info', 'warning', 'alert']:
+        elif data in ['blink', 'on', 'heartbeat', 'notify', 'info', 'info1', 'info2', 'warning', 'alert']:
             self._data = data
             self.start_blinking(node_uuid=node_uuid, index=index, data = data)
         else:
